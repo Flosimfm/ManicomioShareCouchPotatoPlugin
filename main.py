@@ -224,27 +224,33 @@ class ManicomioShare(TorrentProvider, MovieProvider):
     def login(self):
         # Check if we are still logged in every hour
         now = time.time()
+        log.debug('begin: last_login_check: ' + str(self.last_login_check))
+        log.debug('begin: login_failures: ' + str(self.login_failures))
         if self.last_login_check and self.last_login_check < (now - 3600):
             try:
                 output = self.urlopen(self.urls['login_check'])
                 if self.loginCheckSuccess(output):
+                    log.debug('if self.loginCheckSuccess(output) = True') 
                     self.last_login_check = now
                     return True
             except: pass
             self.last_login_check = None
-
+            log.debug('inside if: last_login_check: ' + str(self.last_login_check)) 
+            
         if self.last_login_check:
+            log.debug('if self.last_login_check = True') 
             return True
 
         try:
             # Open the login page to load cloudflare cookies. 
             output = self.urlopen(self.urls['login'])
-            # log.debug('Debug ------ 1: ' + output)    
+            log.debug('Debug before login ------ 1: ' + output)    
             # Now try to login with provided data
             output = self.urlopen(self.urls['login'], data=self.getLoginParams())           
-            # log.debug('Debug login --------2: ' + output)    
+            log.debug('Debug after login --------2: ' + output)    
 
             if self.loginSuccess(output):
+                log.debug('if self.loginSuccess(output) = True') 
                 self.last_login_check = now
                 self.login_failures = 0
                 return True
@@ -253,6 +259,7 @@ class ManicomioShare(TorrentProvider, MovieProvider):
         except Exception as e:
             if isinstance(e, HTTPError):
                 if e.response.status_code >= 400 and e.response.status_code < 500:
+                    log.debug('Exception: ' + str(e)) 
                     self.login_failures += 1
                     if self.login_failures >= 3:
                         self.disableAccount()
