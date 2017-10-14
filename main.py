@@ -198,26 +198,6 @@ class ManicomioShare(TorrentProvider, MovieProvider):
         return '<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title>' in output
 
     loginCheckSuccess = loginSuccess
-#     
-#     def getBrazillianTitle(self, title, movie):        
-#         # This function scrapes the imdb page associated with the movie's release info
-#         log.debug('Looking on IMDB for Brazillian title of: ' + title)
-#         try:            
-#             result = self.getHTMLData(self.urls['imdbreleaseinfo'] % tryUrlencode(movie['identifiers']['imdb']))         
-#             if result is None: 
-#                 log.debug('IMDB could not find a movie corresponding to : ' + title)
-#                 return None
-#             else:
-#                 try:
-#                     akasoup = BeautifulSoup(result, ''html.parser') 
-#                     akatable = akasoup.find('table', attrs={'id': 'akas'})    
-#                     pattern = re.compile(r'^(Brazil)$')
-#                     return akatable.find('td', text=pattern).parent.find_all()[1].text
-#                 except Exception:
-#                     log.debug("Movie doesn't have a translated name or is in native language")
-#                     return title
-#         except:
-#             log.error('Failed to parse IMDB page: %s' % (traceback.format_exc()))
             
     def replaceTitleAndValidateTorrent(self, movie, torrentName):
         # Removes [DualAudio *] tags and subtitle tags [-] or [+]
