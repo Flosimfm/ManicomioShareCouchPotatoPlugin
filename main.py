@@ -254,7 +254,7 @@ class ManicomioShare(TorrentProvider, MovieProvider):
             #wait login loading
             time.sleep(5)  
 
-            #open page logoff page to verify if was signed in sucesfully
+            #open logoff page to verify if was signed in sucesfully
             output = self.urlopen(self.urls['login_check'])
             log.debug('Debug after login --------2: ' + output) 
 
