@@ -195,7 +195,8 @@ class ManicomioShare(TorrentProvider, MovieProvider):
         # log.debug('Debug login: ' + output)    
         # log.debug('Checking login success for Manicomio-share: %s' % ('True' if ('deslogar.php' in output.lower()
                                                                                  # or '<title>:: Manicomio Share - A comunidade do Brasil ::</title>' in output.lower()) else 'False'))
-        return '<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title>' in output
+        log.debug('<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title> in output ==> ' + str('<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title>'  in output)
+        return True
 
     loginCheckSuccess = loginSuccess
             
