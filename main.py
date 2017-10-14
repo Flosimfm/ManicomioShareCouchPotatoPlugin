@@ -195,8 +195,10 @@ class ManicomioShare(TorrentProvider, MovieProvider):
         # log.debug('Debug login: ' + output)    
         # log.debug('Checking login success for Manicomio-share: %s' % ('True' if ('deslogar.php' in output.lower()
                                                                                  # or '<title>:: Manicomio Share - A comunidade do Brasil ::</title>' in output.lower()) else 'False'))
-        log.debug('<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title> in output ==> ' + str('<title>MS-->Logue-se : :: Manicomio Share - A comunidade do Brasil ::</title>'  in output))
-        return True
+        isloginSuccess = output.find(self.urls['login_check']) > 0
+
+        log.debug("loginSuccess = " + str(isloginSuccess))
+        return isloginSuccess
 
     loginCheckSuccess = loginSuccess
             
@@ -206,7 +208,7 @@ class ManicomioShare(TorrentProvider, MovieProvider):
         torrentNameCleared = re.sub('\[livre\]', "", torrentNameCleared)
         torrentNameCleared = re.sub('\[Repack\]', "", torrentNameCleared)
         torrentNameCleared = re.sub('Dublado', "", torrentNameCleared)
-        torrentNameCleared = re.sub('\[.[^[]*\]', "", torrentName) #remove anything between []
+        # torrentNameCleared = re.sub('\[.[^[]*\]', "", torrentName) #remove anything between []
         torrentNameCleared = re.sub(r"^(.*?)\s-\s(?!\d)", "", torrentNameCleared)
         # originalTitle = movie['title']
         # originalTitle = originalTitle.replace(":","")
@@ -248,7 +250,9 @@ class ManicomioShare(TorrentProvider, MovieProvider):
             log.debug('Debug before login ------ 1: ' + output)    
             # Now try to login with provided data
             output = self.urlopen(self.urls['login'], data=self.getLoginParams())           
-            log.debug('Debug after login --------2: ' + output)    
+            log.debug('Debug after login --------2: ' + output)  
+
+            time.sleep(5)  
 
             if self.loginSuccess(output):
                 log.debug('if self.loginSuccess(output) = True') 
