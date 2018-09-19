@@ -34,14 +34,14 @@ class TorrentDetails(object):
         self.datetorrentadded = datetorrentadded
         self.ageindays = ageindays        
 
-class ManicomioShare(TorrentProvider, MovieProvider):
+class SpeedShare(TorrentProvider, MovieProvider):
     # 'search': 'http://www.manicomio-share.com/busca-filmes.php?vince=0&onde=1&search=%s&parent_categ=0&qualite=&cor=&codecvideo=&extensao=&tipoaudio=&lang=0&paisorigem=&direc=',
     urls = {
-        'baseurl': 'https://www.manicomio-share.com/',
-        'login': 'https://www.manicomio-share.com/',
-        'login_check': 'https://www.manicomio-share.com/deslogar.php',
-        'search': 'https://www.manicomio-share.com/pesquisa.php?busca=%s&cat=%s&opt2=0&vnc=0&ano=%s&opt=%s',
-        'torrentdetails': 'https://www.manicomio-share.com/ajax/ajax2.php?torrent=%s',
+        'baseurl': 'https://speed-share.org/',
+        'login': 'https://speed-share.org/',
+        'login_check': 'https://speed-share.org/deslogar.php',
+        'search': 'https://speed-share.org/torrents-search.php?search=%s&cat=%s&opt2=0&vnc=0&ano=%s&opt=%s',
+        'torrentdetails': 'https://speed-share.org/torrents.php',
         'imdbreleaseinfo': 'http://www.imdb.com/title/%s/releaseinfo'
     }
         
